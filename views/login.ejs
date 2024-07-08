@@ -1,0 +1,57 @@
+<%- include('shared/header.ejs') %>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container px-5">
+        <a class="navbar-brand" href="#">Login</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse " id="navbarNav">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 ">
+                <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="/postAd">New Ad</a></li>
+                <li class="nav-item"><a class="nav-link active" href="/login">Admin Area</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid text-center d-flex justify-content-center">
+    <div class="row ms-5 me-5">
+        <div class="col">
+            <div class="row d-none d-md-block ms-5 me-5 my-3">
+                <div class="col rounded border border-3">
+                    <h5>Login is only for admins!</h5>
+                </div>
+            </div>
+            <div class="row ms-5 me-5">
+                <div class="col">
+                    <form class="needs-validation bg-light rounded-3" action="/login" method="post">
+                        <div class="row justify-content-center">
+                            <% if (errors.generic) { %>
+                                <div class="col-6 alert alert-danger" role="alert">
+                                    <%= errors.generic %>
+                                </div>
+                            <% } %>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="usernameInput" class="form-label">Username</label>
+                                <input type="text" class="form-control" name="username" id="usernameInput" required autocomplete="off" value="<%= username %>">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="passwordInput" class="form-label">Password</label>
+                                <input type="password" class="form-control" name="password" id="passwordInput" required autocomplete="off" value="<%= password %>">
+                            </div>
+                            <div class="col-12 mt-3">
+                                <button class="btn btn-primary" type="submit">Login</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('shared/footer.ejs') %>

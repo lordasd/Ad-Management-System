@@ -1,0 +1,59 @@
+<%- include('shared/header.ejs') %>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container px-5">
+        <a class="navbar-brand" href="#">Yad 2</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <form class="row my-2 my-lg-0" action="/" method="post">
+                <div class="col"><input type="text" name="search" class="form-control mr-sm-2" placeholder="Search" aria-label="Search" autocomplete="off"></div>
+                <div class="col"><button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search Ads By Title</button></div>
+            </form>
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 ">
+                <li class="nav-item"><a class="nav-link active" href="/">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="/postAd">New Ad</a></li>
+                <li class="nav-item"><a class="nav-link" href="/login">Admin Area</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid mt-4">
+    <div class="row">
+        <% ads.forEach((ad) => { %>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= ad.title %></h5>
+                        <p class="card-text"><%= ad.description %></p>
+                        <p class="card-text">Price: <%= ad.price %>₪</p>
+                        <p class="card-text">Contact: <%= ad.phoneNumber %></p>
+                        <p class="card-text">Email: <%= ad.email %></p>
+                        <p class="card-text">Posted: <%= new Date(ad.createdAt).toLocaleDateString("en-US", { year: 'numeric', month: 'long', day: 'numeric' }) %></p>
+                    </div>
+                </div>
+            </div>
+        <% }); %>
+    </div>
+</div>
+
+<div class="modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Ad Added!</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Ad added successfully!</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('shared/footer.ejs') %>

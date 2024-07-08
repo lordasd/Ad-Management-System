@@ -1,0 +1,81 @@
+<%- include('shared/header.ejs') %>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container px-5">
+    <a class="navbar-brand" href="#">Ad Posting Form</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse " id="navbarNav">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 ">
+        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+        <li class="nav-item"><a class="nav-link active" href="/postAd">New Ad</a></li>
+        <li class="nav-item"><a class="nav-link" href="/login">Admin Area</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container-fluid text-center">
+  <div class="row ms-5 me-5 d-flex justify-content-center">
+    <div class="col-6">
+      <div class="row d-none d-md-block ms-5 me-5 my-3 rounded border border-3">
+        <div class="col">
+          <h5>Fill in the form, post and wait for admin approval.</h5>
+        </div>
+      </div>
+      <div class="row d-flex justify-content-center">
+        <div class="col-6">
+          <% if (lastEmail && lastAdDate) { %>
+            <div class="alert alert-info" role="alert">
+              Welcome back <%= lastEmail %>, your previous ad was posted on <%= lastAdDate %>.
+            </div>
+          <% } %>
+        </div>
+      </div>
+      <form class="row g-3 needs-validation bg-light rounded-3" action="/postAd" method="post" novalidate>
+        <div class="col-sm-6 md-12">
+          <label for="titleInput" class="form-label">Title</label>
+          <input type="text" class="form-control <%= errors.title ? 'is-invalid' : '' %>" name="title" id="titleInput" required autocomplete="off" minlength="1" maxlength="20" value="<%= title %>">
+          <div class="invalid-feedback">
+            <%= errors.title ? errors.title : '' %>
+          </div>
+        </div>
+        <div class="col-sm-6 md-12">
+          <label for="descriptionInput" class="form-label">Description</label>
+          <input type="text" class="form-control <%= errors.description ? 'is-invalid' : '' %>" name="description" id="descriptionInput" autocomplete="off" maxlength="200" value="<%= description %>">
+          <div class="invalid-feedback">
+            <%= errors.description ? errors.description : '' %>
+          </div>
+        </div>
+        <div class="col-sm-6 md-12">
+          <label for="priceInput" class="form-label">Price</label>
+          <input type="number" step="0.01" pattern="^\d+(\.\d{0,2})?$" class="form-control <%= errors.price ? 'is-invalid' : '' %>" name="price" id="priceInput" required autocomplete="off" min="0" value="<%= price %>">
+          <div class="invalid-feedback">
+            <%= errors.price ? errors.price : '' %>
+          </div>
+        </div>
+        <div class="col-sm-6 md-12">
+          <label for="phoneNumberInput" class="form-label">Phone Number</label>
+          <input type="text" class="form-control <%= errors.phoneNumber ? 'is-invalid' : '' %>" name="phoneNumber" id="phoneNumberInput" autocomplete="tel" value="<%= phoneNumber %>">
+          <div class="invalid-feedback">
+            <%= errors.phoneNumber ? errors.phoneNumber : '' %>
+          </div>
+        </div>
+        <div class="col-sm-6 md-12">
+          <label for="emailInput" class="mb-2">Email</label>
+          <input type="email" class="form-control <%= errors.email ? 'is-invalid' : '' %>" name="email" id="emailInput" required autocomplete="email" value="<%= email %>">
+          <div class="invalid-feedback">
+            <%= errors.email ? errors.email : '' %>
+          </div>
+        </div>
+        <div class="col-12">
+          <button class="btn btn-primary" type="submit">Post</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<script src="/javascripts/formValidation.js"></script>
+
+<%- include('shared/footer.ejs') %>
